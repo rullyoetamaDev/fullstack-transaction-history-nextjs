@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "Transaction" ALTER COLUMN "deskription" DROP NOT NULL,
+ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "updateAt" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "deskription" DROP NOT NULL,
+ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "updateAt" DROP NOT NULL;

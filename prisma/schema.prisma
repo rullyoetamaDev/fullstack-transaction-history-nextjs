@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  token     String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Transaction {
+  id             Int      @id @default(autoincrement())
+  id_transaction Int
+  username       String
+  to_username    String
+  amount         Int
+  description    String
+  status         String
+  createdAt      DateTime @default(now())
+  updateAt       DateTime @updatedAt
+  // topup TopUp[]
+}
+
+// model TopUp {
+//   id          Int      @id @default(autoincrement())
+//   id_topup    Int      @unique
+//   username    String   @unique
+//   amount      Int
+//   balance     Int
+//   description String
+//   status      String
+//   createdAt   DateTime @default(now())
+//   updateAt    DateTime @updatedAt
+//   // transaction Transaction @relation(fields: [username], references: [username])
+// }
+
+model BalanceUser {
+  id        Int      @id @default(autoincrement())
+  username  String
+  balance   Int
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  // topup TopUp[]
+}
