@@ -21,7 +21,7 @@ const Navbar = async () => {
             alt="flip logo"
           />
           <span className="self-center text-md font-semibold whitespace-nowrap dark:text-white">
-            Hallo, {session?.user ? session?.user?.name : ""}
+             {session?.user ? `Hallo, ${session?.user?.name}` : ""}
           </span>
         </a>
 
