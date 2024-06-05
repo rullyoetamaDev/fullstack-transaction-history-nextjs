@@ -8,8 +8,9 @@ export const authOption: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   secret : "RullyOetamaPalingGanteng12345",
   session: {
-    strategy: "jwt",
-  },
+		strategy: "jwt",
+		maxAge: 24 * 60 * 60,
+	},
   pages: {
     signIn: "/sign-in",
   },

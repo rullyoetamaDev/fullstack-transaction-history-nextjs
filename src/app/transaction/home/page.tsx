@@ -8,18 +8,11 @@ const PageHomeTransaction = async () => {
   const session = await getServerSession(authOption);
   //console.log("check : session di transaction : ",session)
 
-  const request 
-  = await fetch(
-    process.env.NODE_ENV === "development"
-      ? `http://localhost:3000/api/transaction-history/${session?.user?.name}`
-      : `http://localhost:3000/api/transaction-history/${session?.user?.name}`
+  const res = await fetch(
+    `http://localhost:3000/api/transaction-history/${session?.user?.name}`
   );
-
-    // console.log("check - request : ", request);
-  const json = await request.json();
-  //console.log("check - json : ", json);
-  const data = json.user;
-  // console.log("check - data : ", data);
+  const respones = await res.json();
+  const data = respones.user;
   return (
     <div>
       <h2 className="pb-3 font-semibold">Transaction History <span className="text-[#FD6245]">{`${session?.user?.name}`}</span></h2>

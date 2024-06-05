@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import React from "react";
 import { LuSend } from "react-icons/lu";
@@ -14,13 +14,14 @@ const PageTransactionlayout = async ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const session = await getServerSession(authOption);
 
-  const session = await getServerSession(authOption)
+  const username: any = session?.user?.name;
 
-  const username : any = session?.user?.name
-  
-  const [data] = await Promise.all([getBalance(username)])
-  const dataBalance = data.map((test) => {return test})
+  const [data] = await Promise.all([getBalance(username)]);
+  const dataBalance = data.map((test) => {
+    return test;
+  });
   //console.log("check : dataBalance di handleSubmit : ", data[0].balance);
   return (
     <>
@@ -52,45 +53,58 @@ const PageTransactionlayout = async ({
         className="fixed left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-lg"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <div className=" border p-2 mb-2 border-slate-400 rounded-md">
-            <p className="text-xs text-slate-500">Balance</p>
-            <p className="text-md bold">{rupiah(data[0].balance)}</p>
+        {session?.user?.name ? (
+          <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <div className=" border p-2 mb-2 border-slate-400 rounded-md">
+              <p className="text-xs text-slate-500">Balance</p>
+              <p className="text-md bold">{rupiah(data[0].balance)}</p>
+            </div>
+            <ul className="space-y-2 font-medium">
+              <li>
+                <Link
+                  href="/transaction/home"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#fd8165] dark:hover:bg-gray-700 group"
+                >
+                  <FiHome className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="ms-3 active:text-[#ee7459]">Home</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/transaction/transfer"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#fd8165] dark:hover:bg-gray-700 group"
+                >
+                  <LuSend className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Transfer Money
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/transaction/topup"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#fd8165] dark:hover:bg-gray-700 group"
+                >
+                  <BiWallet className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Top Up Balance
+                  </span>
+                </Link>
+              </li>
+            </ul>
           </div>
-          <ul className="space-y-2 font-medium">
-            <li>
-              <Link
-                href="/transaction/home"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#fd8165] dark:hover:bg-gray-700 group"
-              >
-                <FiHome className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="ms-3 active:text-[#ee7459]">Home</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/transaction/transfer"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#fd8165] dark:hover:bg-gray-700 group"
-              >
-                <LuSend className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Transfer Money
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/transaction/topup"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#fd8165] dark:hover:bg-gray-700 group"
-              >
-                <BiWallet className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Top Up Balance
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+        ) : (
+          <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <div className=" border p-2 mb-2 border-slate-400 rounded-md">
+              <p className="text-xs text-slate-500">
+                Please{" "}
+                <Link href={"/sign-in"} className=" font-semibold text-slate-800">
+                  Sign-In
+                </Link>
+              </p>
+            </div>
+          </div>
+        )}
       </aside>
 
       <div className="p-4 sm:ml-64">

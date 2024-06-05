@@ -13,7 +13,6 @@ const PageTopupTransaction = () => {
   };
 
   const [values, setValues] = useState<any>(initialState);
-  console.log("check - e.target.value : ", typeof values.amount)
 
   const handleInput = (e:any) => {
     e.preventDefault();
