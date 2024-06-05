@@ -15,11 +15,11 @@ const PageHomeTransaction = async () => {
       : `http://localhost:3000/api/transaction-history/${session?.user?.name}`
   );
 
-    console.log("check - request : ", request);
+    // console.log("check - request : ", request);
   const json = await request.json();
   //console.log("check - json : ", json);
   const data = json.user;
-  console.log("check - data : ", data);
+  // console.log("check - data : ", data);
   return (
     <div>
       <h2 className="pb-3 font-semibold">Transaction History <span className="text-[#FD6245]">{`${session?.user?.name}`}</span></h2>

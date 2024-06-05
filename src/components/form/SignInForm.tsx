@@ -59,7 +59,7 @@ const SignInForm:NextPage = (props):JSX.Element => {
       })
     }, 2000);
 
-    console.log("check - res : ",res)
+    //console.log("check - res : ",res)
   }
   
   return (

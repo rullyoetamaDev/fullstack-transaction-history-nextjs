@@ -7,6 +7,7 @@ import Navbar from "@/components/navbar/Navbar";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/lib/auth";
 import PageSignin from "./(auth)/sign-in/page";
+import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,14 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOption);
 
-  const dataPath = ["/sign-in","sign-up"]
+  const headersList = headers();
+  const domain = headersList.get("x-forwarded-host") || "";
+  const protocol = headersList.get("x-forwarded-proto") || "";
+  const pathname = headersList.get("x-invoke-path") || "";
+
+  console.log("check - domain : ", domain);
+
+  const dataPath = ["/sign-in", "sign-up"];
   // const router = useRouter()
   return (
     <html lang="en">
