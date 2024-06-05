@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { usePathname } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/lib/auth";
 import ButtonSignOut from "../button/buttonSignIn";

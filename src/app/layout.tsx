@@ -4,6 +4,9 @@ import "./globals.css";
 
 //Components
 import Navbar from "@/components/navbar/Navbar";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/lib/auth";
+import PageSignin from "./(auth)/sign-in/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,16 +15,20 @@ export const metadata: Metadata = {
   description: "Aplikasi Keuangan untuk Transfer dan Pembayaran Digital",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOption);
+
+  const dataPath = ["/sign-in","sign-up"]
+  // const router = useRouter()
   return (
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        {children}
+        {session?.user?.name ? <>{children}</> : <PageSignin />}
       </body>
     </html>
   );

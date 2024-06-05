@@ -3,7 +3,7 @@
 import SignInForm from "@/components/form/SignInForm";
 import React from "react";
 
-const pageSignin = () => {
+const PageSignin = () => {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <SignInForm />
@@ -11,4 +11,4 @@ const pageSignin = () => {
   );
 };
 
-export default pageSignin;
+export default PageSignin;
