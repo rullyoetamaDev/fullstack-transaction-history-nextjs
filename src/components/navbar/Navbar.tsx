@@ -1,16 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/lib/auth";
-import ButtonSignOut from "../button/buttonSignIn"; 
 import { UserGreeting } from "./UserGreeting"; // Komponen dipindahkan ke file terpisah
 import { SignInOrOutButton } from "./SignInOrOutButton"; // Komponen dipindahkan ke file terpisah
-
-
-
-
-
-
 
 const Navbar = async () => {
   const session = await getServerSession(authOption);
