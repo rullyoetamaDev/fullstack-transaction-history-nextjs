@@ -37,19 +37,6 @@ model Transaction {
   // topup TopUp[]
 }
 
-// model TopUp {
-//   id          Int      @id @default(autoincrement())
-//   id_topup    Int      @unique
-//   username    String   @unique
-//   amount      Int
-//   balance     Int
-//   description String
-//   status      String
-//   createdAt   DateTime @default(now())
-//   updateAt    DateTime @updatedAt
-//   // transaction Transaction @relation(fields: [username], references: [username])
-// }
-
 model BalanceUser {
   id        Int      @id @default(autoincrement())
   username  String

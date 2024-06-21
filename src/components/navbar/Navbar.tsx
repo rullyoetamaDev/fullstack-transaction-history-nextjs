@@ -1,8 +1,16 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/lib/auth";
-import ButtonSignOut from "../button/buttonSignIn";
+import ButtonSignOut from "../button/buttonSignIn"; 
+import { UserGreeting } from "./UserGreeting"; // Komponen dipindahkan ke file terpisah
+import { SignInOrOutButton } from "./SignInOrOutButton"; // Komponen dipindahkan ke file terpisah
+
+
+
+
+
+
 
 const Navbar = async () => {
   const session = await getServerSession(authOption);
@@ -10,20 +18,14 @@ const Navbar = async () => {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-xl">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="/sign-in"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        >
+        <a href="/sign-in" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
             src="https://storage.googleapis.com/dot-flip-dev/media-library/logo_lg_430b708631/logo_lg_430b708631.svg"
             className="h-8"
             alt="flip logo"
           />
-          <span className="self-center text-md font-semibold whitespace-nowrap dark:text-white">
-             {session?.user ? `Hallo, ${session?.user?.name}` : ""}
-          </span>
+          <UserGreeting user={session?.user ? { name: session.user.name || 'Guest' } : null} />
         </a>
-
         <button
           data-collapse-toggle="navbar-dropdown"
           type="button"
@@ -51,16 +53,7 @@ const Navbar = async () => {
         <div className="hidden w-full md:block md:w-auto" id="navbar-dropdown">
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              {session?.user ? (
-                <ButtonSignOut />
-              ) : (
-                <Link
-                  href={"/sign-in"}
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                >
-                  Sign In
-                </Link>
-              )}
+              <SignInOrOutButton user={session?.user ? session.user.name || 'Guest' : null} />
             </li>
           </ul>
         </div>
@@ -70,3 +63,4 @@ const Navbar = async () => {
 };
 
 export default Navbar;
+
