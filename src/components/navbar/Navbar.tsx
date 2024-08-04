@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOption } from "@/lib/auth";
 import { UserGreeting } from "./UserGreeting"; // Komponen dipindahkan ke file terpisah
 import { SignInOrOutButton } from "./SignInOrOutButton"; // Komponen dipindahkan ke file terpisah
+import Image from "next/image";
 
 const Navbar = async () => {
   const session = await getServerSession(authOption);
@@ -11,11 +12,13 @@ const Navbar = async () => {
     <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-xl">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/sign-in" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img
-            src="https://storage.googleapis.com/dot-flip-dev/media-library/logo_lg_430b708631/logo_lg_430b708631.svg"
+          <Image
+            src="https://seeklogo.com/images/C/code-org-logo-ED49F688BA-seeklogo.com.png"
+            width={40}
+            height={100}
             className="h-8"
             alt="flip logo"
-          />
+         ></Image>
           <UserGreeting user={session?.user ? { name: session.user.name || 'Guest' } : null} />
         </a>
         <button

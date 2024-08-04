@@ -5,7 +5,12 @@ import React from "react";
 
 const PageHomeTransaction = async () => {
   const session = await getServerSession(authOption);
-  const response = await fetch(`http://localhost:3000/api/transaction-history/${session?.user?.name}`);
+  const response = await fetch(`http://localhost:3000/api/transaction-history/${session?.user?.name}`,{
+    cache : 'force-cache',
+    next : {
+      revalidate : 10
+    }
+  });
   const { user: data } = await response.json();
 
   const renderRow = (dataJson: { description: string; status: string; amount: number; createdAt: string }, index: number) => (

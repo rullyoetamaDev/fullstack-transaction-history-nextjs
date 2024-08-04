@@ -8,7 +8,7 @@ import Navbar from "@/components/navbar/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Flip - Aplikasi Keuangan untuk Transfer dan Pembayaran Digital",
+  title: "Code - Aplikasi Keuangan untuk Transfer dan Pembayaran Digital",
   description: "Aplikasi Keuangan untuk Transfer dan Pembayaran Digital",
 };
 
