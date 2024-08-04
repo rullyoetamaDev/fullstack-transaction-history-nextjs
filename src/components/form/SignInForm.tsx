@@ -61,7 +61,7 @@ const SignInForm: NextPage = (props): JSX.Element => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 top-0"
         onSubmit={handleLogin}
       >
-        <p className="text-3xl text-center">Flip test App</p>
+        <p className="text-3xl text-center">Code App</p>
         <p className="pt-5 text-xs text-center">
           do not have account?{" "}
           <span className="text-[#fd8165] cursor-pointer">
@@ -100,7 +100,7 @@ const SignInForm: NextPage = (props): JSX.Element => {
       </form>
 
       <p className="text-center text-gray-500 text-xs bottom-0">
-        &copy;2024 PT.Fliptech Lentera Inspirasi Pertiwi.
+        &copy;2024 PT.Code Inspiration.
       </p>
     </div>
   );
